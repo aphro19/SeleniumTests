@@ -1,5 +1,7 @@
 package Pages;
 import java.net.MalformedURLException;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,8 @@ public class BasePage {
     protected WebDriverWait wait;
 
     protected Properties configured = new Properties();
+
+    public static By bodyLocator = By.xpath("//body" );
 
     public BasePage() {
         
@@ -80,14 +84,11 @@ public class BasePage {
         return waitVisibiiltyAndFindElement(xpath);
     }
 
-
-    public void deleteCookies() {
-        this.driver.manage().deleteAllCookies();
-    }
-
-    public void close() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void verifyPageTitle(String expectedTitle) {
+        // Get the title of the current page
+        String actualTitle = getPageTitle();
+    
+        // Assert that the actual title matches the expected title
+        Assert.assertEquals("The page title does not match the expected title.",expectedTitle,actualTitle);
     }
 }

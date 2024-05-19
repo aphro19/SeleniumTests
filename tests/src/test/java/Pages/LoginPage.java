@@ -14,7 +14,7 @@ public class LoginPage extends BasePage {
     
     private By ContinueLoginLocator = By.xpath("//button[@id='loginBtn']");
     
-     public LoginPage(WebDriver driver) throws IOException {
+     public LoginPage(WebDriver driver)  {
         super(driver);
     }    
     

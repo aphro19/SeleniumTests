@@ -7,28 +7,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
+
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.io.*;
 import java.util.Properties;
+import static org.junit.Assert.assertEquals;
 
 import Pages.BasePage;
 import Pages.FirstPage;
 import Pages.LoginPage;
 
-public class LoginPageTest extends BasePage {
+public class LoginPageTest  {
 
     private WebDriver driver;
-
+    private WebDriverWait wait;
     private Properties configured;
 
     private By registeredLocator = By.xpath("//img[contains(@class, 'avatar avatar--registered')]");
-    private By bodyLocator = By.xpath("//body" );
     private By LogOutLocator = By.xpath("//a[@class='logout']");
     private By LoginLocator = By.xpath("//a[@href='/login']" );
     
     @Before
-    
-    public void setup() throws IOException {
+    public void setup()throws MalformedURLException,IOException {
         ChromeOptions options = new ChromeOptions();
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
@@ -68,7 +69,7 @@ public class LoginPageTest extends BasePage {
      
       // verificatioin login
      
-        Assert.assertTrue(loginpage.getElementByXPath(bodyLocator).getText().contains("Incorrect username or password."));
+        Assert.assertTrue(loginpage.getElementByXPath(LoginPage.bodyLocator).getText().contains("Incorrect username or password."));
 
     }
 
@@ -83,7 +84,7 @@ public class LoginPageTest extends BasePage {
      
       // verificatioin login
      
-        Assert.assertTrue(loginpage.getElementByXPath(bodyLocator).getText().contains("Email is not a valid email address."));
+        Assert.assertTrue(loginpage.getElementByXPath(LoginPage.bodyLocator).getText().contains("Email is not a valid email address."));
 
     }
     
