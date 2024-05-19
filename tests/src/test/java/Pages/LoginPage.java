@@ -13,8 +13,7 @@ public class LoginPage extends BasePage {
     
     
     private By ContinueLoginLocator = By.xpath("//button[@id='loginBtn']");
-    private By WelcomeBackLocator = By.xpath("//span[text()='Welcome back']");
-
+    
      public LoginPage(WebDriver driver) throws IOException {
         super(driver);
     }    

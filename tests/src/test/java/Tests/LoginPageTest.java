@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import java.net.URL;
 import java.io.*;
@@ -23,7 +23,9 @@ public class LoginPageTest extends BasePage {
 
     private By registeredLocator = By.xpath("//img[contains(@class, 'avatar avatar--registered')]");
     private By bodyLocator = By.xpath("//body" );
-
+    private By LogOutLocator = By.xpath("//a[@class='logout']");
+    private By LoginLocator = By.xpath("//a[@href='/login']" );
+    
     @Before
     
     public void setup() throws IOException {
@@ -85,6 +87,22 @@ public class LoginPageTest extends BasePage {
 
     }
     
+    @Test
+    public void testLogOut() throws IOException {
+
+        FirstPage firstpage = new FirstPage(this.driver);
+        
+       LoginPage loginpage = firstpage.goToLoginPage();
+
+       loginpage.loginSubmit(configured.getProperty("TEST_EMAIL"), configured.getProperty("TEST_PASSWORD"));
+     
+
+       Actions action = new Actions(driver);
+       action.moveToElement(loginpage.getElementByXPath(registeredLocator)).perform();
+       loginpage.clickByXPath(LogOutLocator);
+       firstpage.getElementByXPath(LoginLocator);
+     
+    }
     @After
     public void close() {
         if (driver != null) {
